@@ -6,10 +6,10 @@ const labels ={
         documentation:{name:"- Documentation :page_facing_up:", color:"#FF9400"},
     },
     priority:{
-        0:{name:":arrows_clockwise:Priority: OMG!! :scream::fire:", color:"#000000"},
-        1:{name:":arrows_clockwise:Priority: High :fearful:", color:"#bc1200"},
-        2:{name:":arrows_clockwise:Priority: Medium :flushed:", color:"#e2bf0d"},
-        3:{name:":arrows_clockwise:Priority: Low :upside_down_face:", color:"#36ba25"},
+        0:{name:":arrows_clockwise:Priority: Low :upside_down_face:", color:"#36ba25"},
+        1:{name:":arrows_clockwise:Priority: Medium :flushed:", color:"#e2bf0d"},
+        2:{name:":arrows_clockwise:Priority: High :fearful:", color:"#bc1200"},
+        3:{name:":arrows_clockwise:Priority: OMG!! :scream::fire:", color:"#000000"}
 
     },
     issueCost:
