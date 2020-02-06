@@ -177,11 +177,6 @@ importer.parse = function parse(file, parser, callback) {
   parser = parser || function (parts) {
     
     return {
-      /*'author': [
-        parts[1],
-        parts[2],
-        parts[3]
-      ].filter(Boolean).join('\n'),*/
       'title': parts[0],
       'description': parts[1],
       'labels': [labels.groups.type[parts[2]],labels.groups.priority[parts[3]],labels.groups.issueCost[parts[4]]],
