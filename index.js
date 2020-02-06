@@ -4,13 +4,13 @@
  * (C) 2013, EmpireJS.
  *
  */
-
+const labels = require('./labels')
 var fs = require('fs'),
     path = require('path'),
     async = require('async'),
     xlsxRows = require('xlsx-rows'),
     GitHubApi = require('github');
-
+    
 //
 // ### function github-issues-importer (options, callback)
 // #### @options {Object} Options for the import
@@ -18,6 +18,7 @@ var fs = require('fs'),
 //   - @repo {string} Fully qualified repo name (e.g. empirejs/2014-cfp)
 //   - @file {string} Path to a *.tsv file matching
 //
+
 var importer = module.exports = function (options, callback) {
   var auth = options.auth.split(':'),
       parser;
@@ -108,7 +109,7 @@ importer.addIssue = function (options, proposal, callback) {
     repo: repo[1],
     title: proposal.title,
     body: rendered,
-    labels: []
+    labels: proposal.labels
   }, callback);
 };
 
@@ -174,16 +175,17 @@ importer.parse = function parse(file, parser, callback) {
   }
 
   parser = parser || function (parts) {
+    
     return {
-      'author': [
+      /*'author': [
         parts[1],
         parts[2],
         parts[3]
-      ].filter(Boolean).join('\n'),
-      'title': parts[4],
-      'description': parts[5],
-      'audience': parts[6],
-      'anything-else': parts[7] || ''
+      ].filter(Boolean).join('\n'),*/
+      'title': parts[0],
+      'description': parts[1],
+      'labels': [labels.groups.type[parts[2]],labels.groups.priority[parts[3]],labels.groups.issueCost[parts[4]]],
+      'anything-else': parts[5] || ''
     };
   };
 
@@ -214,7 +216,7 @@ importer.parsers = {
 
     try { rows = xlsxRows(file); }
     catch (ex) { return callback(ex); }
-
+    rows.shift();
     callback(null, rows.map(function (row) {
       return parser(row);
     }));
